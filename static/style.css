@@ -1,0 +1,46 @@
+
+        /* Effet Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Styles supplémentaires pour le bouton */
+        .btn-primary {
+            background-color: #1D4ED8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #9333EA;
+        }
+       /* Style pour le bouton désactivé */
+       .btn-disabled {
+            background-color: #f50404;
+            color: #E5E7EB;
+            cursor: none;
+        }
+        /* Animation de dégradé de fond */
+        @keyframes gradientBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .zoom-on-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .zoom-on-hover:hover {
+            transform: scale(1.1); /* Augmente la taille de 10% */
+        }
+        .animate-background {
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+        }

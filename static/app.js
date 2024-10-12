@@ -67,15 +67,17 @@ particlesJS("particles-js", {
     "retina_detect": true
 });
 
+
+const connexion=false
 // Ajout du code pour le compte à rebours
 function updateCountdown() {
     const now = new Date();
     const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 20, 0);
     const classLink = document.getElementById('classLink');
-    
-    if (now >= target) {
+    if (now >= target && start==True) {
         document.getElementById('countdown').innerHTML = "La classe est en cours !";
         classLink.href = "https://meet.jit.si/TremendousManipulationsDefendHopefully";
+        
         classLink.innerHTML = "Accéder à la Classe en Ligne";
         classLink.classList.remove('btn-disabled');
         classLink.classList.add('btn-primary');
@@ -93,5 +95,11 @@ function updateCountdown() {
     }
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+if (connexion==false){
+    // redirection vers un autre site
+    window.location.href = "index_disconnect.html";
+}else{
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+

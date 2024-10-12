@@ -74,7 +74,7 @@ function updateCountdown() {
     const now = new Date();
     const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 20, 0);
     const classLink = document.getElementById('classLink');
-    if (now >= target && start==True) {
+    if (now >= target) {
         document.getElementById('countdown').innerHTML = "La classe est en cours !";
         classLink.href = "https://meet.jit.si/TremendousManipulationsDefendHopefully";
         

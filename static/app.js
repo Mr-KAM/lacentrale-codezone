@@ -95,10 +95,10 @@ function updateCountdown() {
     }
 }
 
-if (connexion==false){
-    // redirection vers un autre site
-    window.location.href = "index_disconnect.html";
-}else{
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
+// if (connexion==false){
+//     // redirection vers un autre site
+//     window.location.href = "index_disconnect.html";
+// }else{
+//     updateCountdown();
+//     setInterval(updateCountdown, 1000);
+// }

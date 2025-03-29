@@ -72,12 +72,12 @@ const connexion=false
 // Ajout du code pour le compte à rebours
 function updateCountdown() {
     const now = new Date();
-    const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 20, 0);
+    const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 05, 0);
     const classLink = document.getElementById('classLink');
     if (now >= target) {
         document.getElementById('countdown').innerHTML = "La classe est en cours !";
         classLink.href = "https://meet.jit.si/TremendousManipulationsDefendHopefully";
-        
+
         classLink.innerHTML = "Accéder à la Classe en Ligne";
         classLink.classList.remove('btn-disabled');
         classLink.classList.add('btn-primary');
@@ -89,7 +89,7 @@ function updateCountdown() {
 
         document.getElementById('countdown').innerHTML = `Débute dans : <h1 class="text-4xl"> ${hours}h ${minutes}m ${seconds}s </h1>`;
         classLink.href = "#";
-        classLink.innerHTML = "La classe sera disponible à 16h20";
+        classLink.innerHTML = "La classe sera disponible à 16h05";
         classLink.classList.remove('btn-primary');
         classLink.classList.add('btn-disabled');
     }
@@ -102,4 +102,3 @@ if (connexion==false){
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
-

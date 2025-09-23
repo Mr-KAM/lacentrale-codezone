@@ -6,6 +6,13 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
+        /* Glassmorphism pour la navigation */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
         /* Styles supplémentaires pour le bouton */
         .btn-primary {
             background-color: #1D4ED8;
@@ -43,4 +50,165 @@
         .animate-background {
             background-size: 400% 400%;
             animation: gradientBackground 15s ease infinite;
+        }
+
+        /* Nouvelles animations pour la landing page */
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Effet de survol pour les cartes */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Scrollbar personnalisée */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Effet de glow pour les éléments importants */
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+        }
+
+        /* Animation de texte coloré */
+        .text-gradient {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #f59e0b);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Améliorations responsives supplémentaires */
+        
+        /* Adaptation des particules pour mobile */
+        @media (max-width: 768px) {
+            #particles-js {
+                opacity: 0.3;
+            }
+        }
+
+        /* Réduction des effets hover sur mobile */
+        @media (hover: none) {
+            .hover-scale:hover {
+                transform: none;
+            }
+            
+            .zoom-on-hover:hover {
+                transform: none;
+            }
+            
+            .card-hover:hover {
+                transform: none;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        /* Adaptation des animations pour les petits écrans */
+        @media (max-width: 640px) {
+            .animate-float {
+                animation-duration: 4s;
+            }
+            
+            /* Réduction de l'effet parallax sur mobile */
+            .parallax-element {
+                transform: none !important;
+            }
+        }
+
+        /* Optimisation pour les très petits écrans */
+        @media (max-width: 480px) {
+            .glass {
+                backdrop-filter: blur(8px);
+                margin: 0 8px;
+            }
+            
+            /* Adaptation des paddings */
+            .responsive-padding {
+                padding: 1rem !important;
+            }
+            
+            /* Réduction des marges */
+            .responsive-margin {
+                margin: 0.5rem !important;
+            }
+        }
+
+        /* Amélioration de la lisibilité sur mobile */
+        @media (max-width: 768px) {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        /* Navigation mobile améliorée */
+        #mobile-menu {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Boutons tactiles plus grands */
+        @media (max-width: 768px) {
+            .touch-target {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Adaptation des grilles pour mobile */
+        @media (max-width: 640px) {
+            .responsive-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Optimisation des images pour mobile */
+        @media (max-width: 768px) {
+            .responsive-image {
+                max-width: 280px;
+                height: auto;
+            }
+        }
+
+        /* Amélioration des formulaires sur mobile */
+        @media (max-width: 768px) {
+            input, button, select, textarea {
+                font-size: 16px; /* Évite le zoom sur iOS */
+            }
         }

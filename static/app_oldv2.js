@@ -72,10 +72,9 @@ const connexion = true;
 // Configuration de la date et heure cible
 const CONFIG = {
     // Format: YYYY-MM-DD HH:MM:SS
-    targetDate: "2025-09-24 20:00:00",      // Date/heure d'ouverture de la classe
-    endDate: "2025-09-24 21:45:00",         // Date/heure de fermeture de la classe (optionnel)
+    targetDate: "2025-09-23 15:09:00",
     classUrl: "https://meet.jit.si/TremendousManipulationsDefendHopefully",
-    redirectUrl: "index.html"
+    redirectUrl: "index_disconnect.html"
 };
 
 // Fonction pour parser la date configurée
@@ -112,7 +111,6 @@ function updateCountdown() {
     try {
         const now = new Date();
         const target = parseTargetDate(CONFIG.targetDate);
-        const endTarget = CONFIG.endDate ? parseTargetDate(CONFIG.endDate) : null;
         const classLink = document.getElementById('classLink');
         const countdownElement = document.getElementById('countdown');
         
@@ -122,46 +120,21 @@ function updateCountdown() {
             return;
         }
         
-        // Vérifier si la classe est terminée
-        if (endTarget && now >= endTarget) {
-            countdownElement.innerHTML = "La classe est terminée.";
-            classLink.href = "#";
-            classLink.innerHTML = "La classe s'est terminée à " + endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
-            classLink.classList.remove('btn-primary');
-            classLink.classList.add('btn-disabled');
-        }
-        // Vérifier si la classe est en cours
-        else if (now >= target) {
-            let statusMessage = "La classe est en cours !";
-            
-            // Ajouter info sur la fin si définie
-            if (endTarget) {
-                const remainingTime = endTarget - now;
-                const remainingFormatted = formatTimeRemaining(remainingTime);
-                statusMessage += ` <small class="block text-sm mt-2 opacity-75">Se termine dans : ${remainingFormatted}</small>`;
-            }
-            
-            countdownElement.innerHTML = statusMessage;
+        if (now >= target) {
+            // La classe est en cours ou terminée
+            countdownElement.innerHTML = "La classe est en cours !";
             classLink.href = CONFIG.classUrl;
             classLink.innerHTML = "Accéder à la Classe en Ligne";
             classLink.classList.remove('btn-disabled');
             classLink.classList.add('btn-primary');
-        } 
-        // La classe n'a pas encore commencé
-        else {
+        } else {
+            // Calculer le temps restant
             const diff = target - now;
             const timeRemaining = formatTimeRemaining(diff);
             
-            let scheduleInfo = `La classe sera disponible le ${target.toLocaleDateString('fr-FR')} à ${target.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}`;
-            
-            // Ajouter info sur la durée si date de fin définie
-            if (endTarget) {
-                scheduleInfo += ` (jusqu'à ${endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})})`;
-            }
-            
             countdownElement.innerHTML = `Débute dans : <h1 class="text-4xl">${timeRemaining}</h1>`;
             classLink.href = "#";
-            classLink.innerHTML = scheduleInfo;
+            classLink.innerHTML = `La classe sera disponible le ${target.toLocaleDateString('fr-FR')} à ${target.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}`;
             classLink.classList.remove('btn-primary');
             classLink.classList.add('btn-disabled');
         }
@@ -172,9 +145,8 @@ function updateCountdown() {
 }
 
 // Fonction pour mettre à jour la configuration (optionnelle)
-function updateConfig(newTargetDate, newEndDate = null, newClassUrl = null) {
+function updateConfig(newTargetDate, newClassUrl = null) {
     CONFIG.targetDate = newTargetDate;
-    CONFIG.endDate = newEndDate;
     if (newClassUrl) {
         CONFIG.classUrl = newClassUrl;
     }
@@ -203,7 +175,5 @@ if (connexion === false) {
     }
 }
 
-// Exemples d'utilisation pour changer la configuration dynamiquement:
-// updateConfig("2024-12-31 23:59:59", "2025-01-01 02:00:00", "https://meet.jit.si/NouvelleClasse");
-// updateConfig("2024-09-25 14:00:00", "2024-09-25 16:30:00"); // Classe de 2h30
-// updateConfig("2024-10-01 10:00:00"); // Sans date de fin (classe ouverte indéfiniment après ouverture)
+// Exemple d'utilisation pour changer la configuration dynamiquement:
+// updateConfig("2024-12-31 23:59:59", "https://meet.jit.si/NouvelleClasse");

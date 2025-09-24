@@ -74,7 +74,7 @@ const CONFIG = {
     // Format: YYYY-MM-DD HH:MM:SS
     targetDate: "2025-09-24 20:00:00",      // Date/heure d'ouverture de la classe
     endDate: "2025-09-24 21:45:00",         // Date/heure de fermeture de la classe (optionnel)
-    classUrl: "https://meet.jit.si/TremendousManipulationsDefendHopefully",
+    classUrl: "https://meet.jit.si/CasualWarmingsDepictNeither",
     redirectUrl: "index.html"
 };
 

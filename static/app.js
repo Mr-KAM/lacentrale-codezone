@@ -72,8 +72,8 @@ const connexion = true;
 // Configuration de la date et heure cible
 const CONFIG = {
     // Format: YYYY-MM-DD HH:MM:SS
-    targetDate: "2025-09-24 20:00:00",      // Date/heure d'ouverture de la classe
-    endDate: "2025-09-24 22:00:00",         // Date/heure de fermeture de la classe (optionnel)
+    targetDate: "2025-10-04 10:00:00",      // Date/heure d'ouverture de la classe
+    endDate: "2025-10-04 12:00:00",         // Date/heure de fermeture de la classe (optionnel)
     classUrl: "https://meet.jit.si/CasualWarmingsDepictNeither",
     redirectUrl: "index.html"
 };
@@ -113,7 +113,7 @@ function updateCountdown() {
         const now = new Date();
         const target = parseTargetDate(CONFIG.targetDate);
         const endTarget = CONFIG.endDate ? parseTargetDate(CONFIG.endDate) : null;
-        const classLink = document.getElementById('classLink');
+        const classLink = document.getElementById('classLink-mobile');
         const countdownElement = document.getElementById('countdown');
         
         // Vérifier si les éléments existent
@@ -152,11 +152,11 @@ function updateCountdown() {
             const diff = target - now;
             const timeRemaining = formatTimeRemaining(diff);
             
-            let scheduleInfo = `La classe sera disponible le ${target.toLocaleDateString('fr-FR')} à ${target.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}`;
+            let scheduleInfo = `La classe sera ouverte le <b> ${target.toLocaleDateString('fr-FR')} </b> de <b> ${target.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}`;
             
             // Ajouter info sur la durée si date de fin définie
             if (endTarget) {
-                scheduleInfo += ` (jusqu'à ${endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})})`;
+                scheduleInfo += ` à ${endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})} </b>`;
             }
             
             countdownElement.innerHTML = `Débute dans : <h1 class="text-4xl">${timeRemaining}</h1>`;

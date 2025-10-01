@@ -8,7 +8,7 @@
 
         /* Glassmorphism pour la navigation */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.08);
+            /* background: rgba(255, 255, 255, 0.08); */
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }

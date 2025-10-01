@@ -1,113 +1,127 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formation Python en Ligne - La Centrale CodeZone</title>
-    <meta name="description" content="Rejoignez nos formations Python interactives en ligne. Apprenez à coder avec des experts et développez vos compétences en programmation.">
-    
+    <meta name="description"
+        content="Rejoignez nos formations Python interactives en ligne. Apprenez à coder avec des experts et développez vos compétences en programmation.">
+    <!-- Exemple d'amélioration meta -->
+    <meta property="og:title" content="Formation Python 3D - La Centrale CodeZone">
+    <meta property="og:image" content="IMG/modélisation 3D python-v3.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Configuration Tailwind -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#1D4ED8',
-              secondary: '#9333EA',
-              accent: '#F59E0B',
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1D4ED8',
+                        secondary: '#9333EA',
+                        accent: '#F59E0B',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
+                        'slideInLeft': 'slideInLeft 0.8s ease-out forwards',
+                        'slideInRight': 'slideInRight 0.8s ease-out forwards',
+                    }
+                },
             },
-            animation: {
-              'float': 'float 6s ease-in-out infinite',
-              'fadeInUp': 'fadeInUp 0.8s ease-out forwards',
-              'slideInLeft': 'slideInLeft 0.8s ease-out forwards',
-              'slideInRight': 'slideInRight 0.8s ease-out forwards',
-            }
-          },
-        },
-      }
+        }
     </script>
-    
+
     <link rel="stylesheet" href="static/style.css">
-    
+
     <!-- Styles personnalisés pour les animations -->
     <style>
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-      }
-      
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-      }
-      
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-30px);
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        to {
-          opacity: 1;
-          transform: translateX(0);
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-      }
-      
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(30px);
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: all 0.6s ease-out;
         }
-        to {
-          opacity: 1;
-          transform: translateX(0);
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
         }
-      }
-      
-      .animate-on-scroll {
-        opacity: 0;
-        transition: all 0.6s ease-out;
-      }
-      
-      .animate-on-scroll.animated {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
-      .hover-scale {
-        transition: transform 0.3s ease;
-      }
-      
-      .hover-scale:hover {
-        transform: scale(1.05);
-      }
-      
-      .gradient-text {
-        background: linear-gradient(45deg, #1D4ED8, #9333EA, #F59E0B);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
+
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #1D4ED8, #9333EA, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
     </style>
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-x-hidden">
-    
+
     <!-- Particles Background -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <div id="particles-js" class="fixed top-0 left-0 w-full h-full z-0"></div>
-    
+
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-nav backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,27 +130,33 @@
                     <i class="fas fa-code text-xl md:text-2xl text-yellow-400"></i>
                     <span class="text-lg md:text-xl font-bold text-white">CodeZone</span>
                 </div>
-                
+
                 <!-- Menu mobile hamburger -->
                 <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
                     <i class="fas fa-bars"></i>
                 </button>
-                
+
                 <!-- Menu desktop -->
                 <div class="hidden md:flex space-x-4 lg:space-x-6">
-                    <a href="#hero" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Accueil</a>
-                    <a href="#features" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Formations</a>
-                    <a href="#testimonials" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Témoignages</a>
-                    <a href="#contact" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Contact</a>
+                    <a href="#hero"
+                        class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Accueil</a>
+                    <a href="#features"
+                        class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Formations</a>
+                    <a href="#testimonials"
+                        class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Témoignages</a>
+                    <a href="#contact"
+                        class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Contact</a>
                 </div>
             </div>
-            
+
             <!-- Menu mobile -->
             <div id="mobile-menu" class="md:hidden hidden pb-4">
                 <div class="space-y-2">
                     <a href="#hero" class="block text-white hover:text-yellow-400 transition-colors py-2">Accueil</a>
-                    <a href="#features" class="block text-white hover:text-yellow-400 transition-colors py-2">Formations</a>
-                    <a href="#testimonials" class="block text-white hover:text-yellow-400 transition-colors py-2">Témoignages</a>
+                    <a href="#features"
+                        class="block text-white hover:text-yellow-400 transition-colors py-2">Formations</a>
+                    <a href="#testimonials"
+                        class="block text-white hover:text-yellow-400 transition-colors py-2">Témoignages</a>
                     <a href="#contact" class="block text-white hover:text-yellow-400 transition-colors py-2">Contact</a>
                 </div>
             </div>
@@ -147,31 +167,40 @@
     <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 pt-24 md:pt-20">
         <div class="text-center max-w-5xl mx-auto z-10">
             <div class="animate-float mb-6 md:mb-8">
-                <img src="IMG/MOI V3.png" alt="Formation Python" class="mx-auto w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-3xl shadow-2xl">
+                <img src="IMG/MOI V3.png" alt="Formation Python"
+                    class="mx-auto w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-3xl shadow-2xl">
             </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 animate-fadeInUp px-2">
-                Merci pour votre 
-                <span class="gradient-text">Participation !</span>
+
+            <!-- <h5 class="text-white">
+                Kambou Anicet Cyrille est un ingénieur agronome et enseignant-chercheur Ivoirien. Il travaille notamment dans les domaines de l'agronomie, de la foresterie, de l'environnement et du développement durable. Depuis mars 2020, il est engagé professionnellement à l'École supérieure d'Agronomie (ESA/INP-HB) à Yamoussoukro, Côte d'Ivoire, où il combine ses compétences en ingénierie agronomique, développement, données, SIG, télédetection et intelligence artificielle appliquée à ses domaines de recherche. Son travail inclut l'utilisation de technologies avancées telles que la données géospatiale et le deep learning pour améliorer les changements environnementaux et l'agriculture. Il est également actif sur les réseaux professionnels en partageant ses connaissances et projets liés à l'IA et à l'agronomie. Kambou Anicet Cyrille est connu pour sa capacité à allier les sciences agronomiques traditionnelles avec les technologies modernes pour contribuer au développement durable et à la gestion des ressources naturelles.
+            </h5> -->
+
+            <h1
+                class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 animate-fadeInUp px-2">
+                Nous vous souhaitons
+                <span class="gradient-text">bienvenue !</span>
             </h1>
-            
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 animate-fadeInUp px-4 max-w-4xl mx-auto" style="animation-delay: 0.2s;">
-                Vous avez fait le premier pas vers la maîtrise de Python. 
-                <br class="hidden sm:block">Continuons ensemble ce voyage passionnant !
+
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 animate-fadeInUp px-4 max-w-4xl mx-auto"
+                style="animation-delay: 0.2s;">
+                Si vous souhaitez apprendre et dévélopper vos compétences,
+                <br class="hidden sm:block"> alors vous êtes à la bonne adresse !
             </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp px-4" style="animation-delay: 0.4s;">
-                <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb" 
-                   class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base w-full sm:w-auto">
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp px-4"
+                style="animation-delay: 0.4s;">
+                <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb"
+                    class="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base w-full sm:w-auto">
                     <i class="fab fa-whatsapp mr-2 md:mr-3 text-lg md:text-xl"></i>
-                    Rejoindre le groupe WhatsApp
+                    Rejoignez notre groupe WhatsApp
                 </a>
                 <div class="text-white text-sm md:text-lg text-center sm:text-left">
                     <i class="far fa-calendar-alt mr-2 text-yellow-400"></i>
-                    Session programmée : 
+                    Session en ligne programmée :
                     <br class="sm:hidden">
                     <strong>
-                        <a href="formation.html" class="inline-block mt-2 sm:mt-0 sm:ml-2 px-4 md:px-8 py-2 md:py-4 rounded-full bg-red-600 hover:bg-red-700 transition-colors text-sm md:text-base">
+                        <a href="formation.html"
+                            class="inline-block mt-2 sm:mt-0 sm:ml-2 px-4 md:px-8 py-2 md:py-4 rounded-full bg-red-600 hover:bg-red-700 transition-colors text-sm md:text-base">
                             Participer !
                         </a>
                     </strong>
@@ -188,14 +217,16 @@
                     Ce que nous faisons
                 </h2>
                 <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-                    Des formations interactives conçues pour vous faire progresser rapidement dans le monde de la programmation Python et analyse de données.
+                    Des formations interactives conçues pour vous faire progresser rapidement dans le monde de la
+                    programmation Python et analyse de données.
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Feature 1 -->
                 <div class="glass rounded-2xl p-6 md:p-8 text-center hover-scale animate-on-scroll">
-                    <div class="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                    <div
+                        class="w-12 h-12 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                         <i class="fas fa-laptop-code text-xl md:text-2xl text-white"></i>
                     </div>
                     <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Pratique Interactive</h3>
@@ -203,10 +234,11 @@
                         Apprenez en codant directement avec des exercices pratiques et des projets réels.
                     </p>
                 </div>
-                
+
                 <!-- Feature 2 -->
                 <div class="glass rounded-2xl p-6 md:p-8 text-center hover-scale animate-on-scroll">
-                    <div class="w-12 h-12 md:w-16 md:h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                    <div
+                        class="w-12 h-12 md:w-16 md:h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                         <i class="fas fa-users text-xl md:text-2xl text-white"></i>
                     </div>
                     <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Communauté Active</h3>
@@ -214,10 +246,11 @@
                         Rejoignez une communauté d'apprenants motivés et échangez avec d'autres développeurs.
                     </p>
                 </div>
-                
+
                 <!-- Feature 3 -->
                 <div class="glass rounded-2xl p-6 md:p-8 text-center hover-scale animate-on-scroll">
-                    <div class="w-12 h-12 md:w-16 md:h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                    <div
+                        class="w-12 h-12 md:w-16 md:h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                         <i class="fas fa-rocket text-xl md:text-2xl text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-4">Progression Rapide</h3>
@@ -225,7 +258,7 @@
                         Méthode d'apprentissage optimisée pour vous faire progresser efficacement.
                     </p>
                 </div>
-                
+
                 <!-- Feature 4 -->
                 <div class="glass rounded-2xl p-8 text-center hover-scale animate-on-scroll">
                     <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -236,7 +269,7 @@
                         Obtenez des certifications reconnues pour valoriser vos compétences.
                     </p>
                 </div>
-                
+
                 <!-- Feature 5 -->
                 <div class="glass rounded-2xl p-8 text-center hover-scale animate-on-scroll">
                     <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -247,7 +280,7 @@
                         Apprenez à votre rythme avec des sessions adaptées à votre emploi du temps.
                     </p>
                 </div>
-                
+
                 <!-- Feature 6 -->
                 <div class="glass rounded-2xl p-8 text-center hover-scale animate-on-scroll">
                     <div class="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -275,7 +308,7 @@
                     <p class="mb-4">🕐 <strong>Même horaire</strong></p> -->
                     <p class="text-lg">Restez connecté pour continuer à apprendre avec nous !</p>
                 </div>
-                
+
                 <div class="grid md:grid-cols-2 gap-6 mt-8">
                     <div class="glass rounded-xl p-6">
                         <h3 class="text-xl font-bold text-white mb-3">
@@ -290,18 +323,20 @@
                             <li>• Machine learning</li>
                         </ul>
                     </div>
-                    
+
                     <div class="glass rounded-xl p-6">
                         <h3 class="text-xl font-bold text-white mb-3">
                             <i class="fas fa-tools text-purple-400 mr-2"></i>
                             Outils requis
                         </h3>
                         <ul class="text-gray-300 space-y-2">
-                            <!-- <li>• Python 3.8+</li>
                             <li>• Anaconda </li>
+                            <li>• Votre ordinateur portable</li>
+                            <!-- <li>• Python 3.8+</li>
+                            
                             <li>• VS Code</li>
                             <li>• Git</li>
-                            <li>• Votre ordinateur portable</li>
+                            
                             <li>• une connexion stable</li> -->
                             <li>Votre motivation !</li>
                         </ul>
@@ -400,35 +435,35 @@
                 <p class="text-xl text-gray-300 mb-8">
                     Rejoignez notre communauté et ne manquez aucune mise à jour.
                 </p>
-                
+
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-                    <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb" 
-                       class="inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb"
+                        class="inline-flex items-center px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
                         <i class="fab fa-whatsapp mr-3 text-xl"></i>
                         Groupe WhatsApp
                     </a>
-                    <a href="mailto:contact@codezone.com" 
-                       class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <a href="mailto:contact@codezone.com"
+                        class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
                         <i class="fas fa-envelope mr-3 text-xl"></i>
                         Email
                     </a>
                 </div>
-                
+
                 <div class="text-center">
                     <p class="text-gray-400 mb-4">Suivez-nous sur nos réseaux sociaux</p>
-                <div class="flex justify-center space-x-6 mt-4">
-                    <a href="www.linkedin.com/in/kambou-anicet-cyrille-ing-agro-dev-data"
-                        class="text-blue-400 hover:text-blue-300 transition-colors">
-                        <i class="fab fa-linkedin text-2xl"></i>
-                    </a>
-                    <a href="https://github.com/Mr-KAM" class="text-gray-400 hover:text-gray-300 transition-colors">
-                        <i class="fab fa-github text-2xl"></i>
-                    </a>
-                    <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb"
-                        class="text-green-400 hover:text-green-300 transition-colors">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                    </a>
-                </div>
+                    <div class="flex justify-center space-x-6 mt-4">
+                        <a href="www.linkedin.com/in/kambou-anicet-cyrille-ing-agro-dev-data"
+                            class="text-blue-400 hover:text-blue-300 transition-colors">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="https://github.com/Mr-KAM" class="text-gray-400 hover:text-gray-300 transition-colors">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb"
+                            class="text-green-400 hover:text-green-300 transition-colors">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -576,4 +611,5 @@
     </script>
 
 </body>
+
 </html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Formations - La Centrale CodeZone</title>
+    <meta name="description" content="Découvrez toutes nos formations Python : Data Science, Machine Learning, Développement Web et plus encore. Formations gratuites en ligne.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuration Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#1D4ED8',
+              secondary: '#9333EA',
+              accent: '#F59E0B',
+            },
+          },
+        },
+      }
+    </script>
+    
+    <link rel="stylesheet" href="static/style.css">
+    
+    <!-- Styles personnalisés -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;    
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(147, 51, 234, 0.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            animation: slideIn 0.4s ease-out;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(220, 38, 38, 1);
+            transform: rotate(90deg);
+        }
+
+        .formation-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .formation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .badge-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .status-en-cours {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .status-a-venir {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .status-termine {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        /* Scrollbar personnalisée pour le modal */
+        .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #1D4ED8, #9333EA);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .search-bar {
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(29, 78, 216, 0.5);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-x-hidden">
+    
+    <!-- Particles Background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <div id="particles-js" class="fixed top-0 left-0 w-full h-full z-0"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3 md:py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-code text-xl md:text-2xl text-yellow-400"></i>
+                    <span class="text-lg md:text-xl font-bold text-white">
+                        <a href="index.html">CodeZone</a>
+                    </span>
+                </div>
+                
+                <!-- Menu mobile hamburger -->
+                <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Menu desktop -->
+                <div class="hidden md:flex space-x-4 lg:space-x-6">
+                    <a href="index.html" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Accueil</a>
+                    <a href="formations.html" class="text-yellow-400 font-semibold transition-colors text-sm lg:text-base">Formations</a>
+                    <a href="index.html#contact" class="text-white hover:text-yellow-400 transition-colors text-sm lg:text-base">Contact</a>
+                </div>
+            </div>
+            
+            <!-- Menu mobile -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="block text-white hover:text-yellow-400 transition-colors py-2">Accueil</a>
+                    <a href="formations.html" class="block text-yellow-400 font-semibold transition-colors py-2">Formations</a>
+                    <a href="index.html#contact" class="block text-white hover:text-yellow-400 transition-colors py-2">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-12 px-4">
+        <div class="max-w-7xl mx-auto text-center z-10 relative">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 animate-fadeInUp">
+                Nos <span class="gradient-text">Formations</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Découvrez toutes nos formations Python pour développer vos compétences en programmation, data science et plus encore.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filtres et Recherche -->
+    <section class="relative z-10 px-4 pb-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Barre de recherche -->
+            <div class="glass rounded-2xl p-6 mb-6">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Rechercher une formation (titre, description, mots-clés)..." 
+                        class="search-bar w-full px-6 py-4 pl-14 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    >
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+                </div>
+            </div>
+
+            <!-- Filtres -->
+            <div class="glass rounded-2xl p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Filtre Catégorie -->
+                    <div>
+                        <label class="block text-white font-semibold mb-3">
+                            <i class="fas fa-folder mr-2 text-blue-400"></i>
+                            Catégorie
+                        </label>
+                        <select id="filter-categorie" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="tous">Toutes les catégories</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtre Niveau -->
+                    <div>
+                        <label class="block text-white font-semibold mb-3">
+                            <i class="fas fa-signal mr-2 text-green-400"></i>
+                            Niveau
+                        </label>
+                        <select id="filter-niveau" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-blue-500">
+                            <option value="tous">Tous les niveaux</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtre Statut -->
+                    <div>
+                        <label class="block text-white font-semibold mb-3">
+                            <i class="fas fa-clock mr-2 text-yellow-400"></i>
+                            Statut
+                        </label>
+                        <select id="filter-statut" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="tous">Tous les statuts</option>
+                            <option value="accessible">Accessible</option>
+                            <option value="not-added">À venir</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bouton Reset -->
+                <div class="mt-6 text-center">
+                    <button id="reset-filters" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-redo mr-2"></i>
+                        Réinitialiser les filtres
+                    </button>
+                </div>
+            </div>
+
+            <!-- Compteur de résultats -->
+            <div class="mt-6 text-center">
+                <p id="results-count" class="text-white text-lg font-semibold"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liste des Formations -->
+    <section class="relative z-10 px-4 pb-20">
+        <div class="max-w-7xl mx-auto">
+            <div id="formations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Les cartes seront générées dynamiquement par JavaScript -->
+            </div>
+
+            <!-- Message si aucun résultat -->
+            <div id="no-results" class="hidden text-center py-20">
+                <i class="fas fa-search text-6xl text-gray-500 mb-4"></i>
+                <h3 class="text-2xl font-bold text-white mb-2">Aucune formation trouvée</h3>
+                <p class="text-gray-400">Essayez de modifier vos critères de recherche</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Détails Formation -->
+    <div id="formation-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div id="modal-body">
+                <!-- Le contenu sera généré dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 text-center relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass rounded-xl p-6">
+                <p class="text-gray-400 mb-2">
+                    © 2025 La Centrale CodeZone - Formations Python en Ligne
+                </p>
+                <p class="text-gray-500">
+                    Créé avec ❤️ par <strong class="text-yellow-400">@Mr-KAM</strong>
+                </p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="https://www.linkedin.com/in/kambou-anicet-cyrille-ing-agro-dev-data"
+                        class="text-blue-400 hover:text-blue-300 transition-colors">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/Mr-KAM" class="text-gray-400 hover:text-gray-300 transition-colors">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb"
+                        class="text-green-400 hover:text-green-300 transition-colors">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="static/formation_list.js"></script>
+    <script>
+        // Configuration des particules
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
+                }
+            }
+        });
+
+        // Menu mobile toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = mobileMenuBtn.querySelector('i');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenuIcon.classList.remove('fa-times');
+                mobileMenuIcon.classList.add('fa-bars');
+            } else {
+                mobileMenuIcon.classList.remove('fa-bars');
+                mobileMenuIcon.classList.add('fa-times');
+            }
+        });
+
+        // Variables globales
+        let formationsData = [];
+        let filteredFormations = [];
+
+        // Charger et afficher les formations
+        function loadFormations() {
+            // Vérifier que formation_list existe
+            if (typeof formation_list === 'undefined') {
+                console.error('formation_list n\'est pas défini');
+                return;
+            }
+            
+            // Convertir l'objet formation_list en tableau
+            formationsData = Object.values(formation_list);
+            console.log('Formations chargées:', formationsData);
+            
+            // Populer les filtres
+            populateFilters();
+            
+            // Afficher toutes les formations
+            filteredFormations = [...formationsData];
+            displayFormations();
+        }
+
+        // Populer les filtres avec les données disponibles
+        function populateFilters() {
+            const categorieSelect = document.getElementById('filter-categorie');
+            
+            // Extraire les catégories uniques
+            const categories = [...new Set(formationsData.flatMap(f => 
+                f.keyword ? f.keyword.split(',').map(k => k.trim()) : []
+            ))];
+            
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.toLowerCase();
+                option.textContent = cat;
+                categorieSelect.appendChild(option);
+            });
+        }
+
+        // Afficher les formations
+        function displayFormations() {
+            console.log('displayFormations appelée avec:', filteredFormations);
+            const grid = document.getElementById('formations-grid');
+            const noResults = document.getElementById('no-results');
+            const resultsCount = document.getElementById('results-count');
+
+            if (!grid) {
+                console.error('Element formations-grid non trouvé');
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            if (filteredFormations.length === 0) {
+                grid.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                resultsCount.textContent = 'Aucune formation trouvée';
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            noResults.classList.add('hidden');
+            resultsCount.textContent = `${filteredFormations.length} formation(s) trouvée(s)`;
+
+            filteredFormations.forEach(formation => {
+                console.log('Création de carte pour:', formation.Title);
+                const card = createFormationCard(formation);
+                grid.appendChild(card);
+            });
+        }
+
+        // Créer une carte de formation
+        function createFormationCard(formation) {
+            const card = document.createElement('div');
+            card.className = 'formation-card glass rounded-2xl overflow-hidden relative';
+            
+            const statusClass = formation.status === 'accessible' ? 'status-en-cours' : 'status-a-venir';
+            const statusText = formation.status === 'accessible' ? 'Accessible' : 'À venir';
+            const price = formation['price:'] || 'Gratuit';
+            const teacher = formation.teacher || 'Mr-KAM';
+
+            card.innerHTML = `
+                <span class="badge-status ${statusClass} text-white">${statusText}</span>
+                
+                <div class="relative h-48 overflow-hidden">
+                    <img src="${formation.img}" alt="${formation.Title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-3 line-clamp-2">${formation.Title}</h3>
+                    
+                    <p class="text-gray-300 mb-4 line-clamp-3 text-sm">${formation.resume || 'Description à venir'}</p>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-400 text-sm">
+                            <i class="fas fa-user mr-2 text-purple-400"></i>
+                            <span>${teacher}</span>
+                        </div>
+                        <div class="flex items-center text-green-400 text-sm font-bold">
+                            <i class="fas fa-tag mr-2"></i>
+                            <span>${price}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 mb-4 flex-wrap">
+                        ${formation.keyword ? formation.keyword.split(',').slice(0, 3).map(k => 
+                            `<span class="px-2 py-1 bg-blue-600/30 text-blue-300 rounded text-xs">${k.trim()}</span>`
+                        ).join('') : ''}
+                    </div>
+                    
+                    <button onclick="openModal(${JSON.stringify(formation).replace(/"/g, '&quot;')})" 
+                            class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Voir les détails
+                    </button>
+                </div>
+            `;
+
+            // Ajouter événement pour ouvrir le modal au clic sur la carte
+            card.addEventListener('click', (e) => {
+                if (!e.target.closest('button')) {
+                    openModal(formation);
+                }
+            });
+
+            return card;
+        }
+
+        // Ouvrir le modal avec les détails
+        function openModal(formation) {
+            const modal = document.getElementById('formation-modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const statusClass = formation.status === 'accessible' ? 'bg-green-600' : 'bg-blue-600';
+            const statusText = formation.status === 'accessible' ? 'Accessible maintenant' : 'Prochainement';
+            const price = formation['price:'] || 'Gratuit';
+            const teacher = formation.teacher || 'Mr-KAM';
+            const teacherDesc = formation.teacher_description || 'Enseignant-chercheur';
+            const certification = formation.certification ? 'Oui' : 'Non';
+
+            modalBody.innerHTML = `
+                <!-- Image header -->
+                <div class="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+                    <img src="${formation.img}" alt="${formation.Title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                        <span class="${statusClass} px-4 py-2 rounded-full text-white text-sm font-bold inline-block mb-4">
+                            ${statusText}
+                        </span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">${formation.Title}</h2>
+                    </div>
+                </div>
+
+                <!-- Contenu -->
+                <div class="p-6 md:p-8">
+                    <!-- Informations clés -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="glass rounded-xl p-4 text-center">
+                            <i class="fas fa-tag text-2xl text-green-400 mb-2"></i>
+                            <p class="text-gray-400 text-xs">Prix</p>
+                            <p class="text-white font-bold">${price}</p>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <i class="fas fa-user text-2xl text-purple-400 mb-2"></i>
+                            <p class="text-gray-400 text-xs">Formateur</p>
+                            <p class="text-white font-bold text-sm">${teacher}</p>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <i class="fas fa-certificate text-2xl text-yellow-400 mb-2"></i>
+                            <p class="text-gray-400 text-xs">Certification</p>
+                            <p class="text-white font-bold">${certification}</p>
+                        </div>
+                        <div class="glass rounded-xl p-4 text-center">
+                            <i class="fas fa-link text-2xl text-blue-400 mb-2"></i>
+                            <p class="text-gray-400 text-xs">Type</p>
+                            <p class="text-white font-bold text-sm">${formation.type || 'En ligne'}</p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-file-alt mr-3 text-blue-400"></i>
+                            Description
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed">${formation.resume || 'Description complète à venir.'}</p>
+                    </div>
+
+                    <!-- Mots-clés -->
+                    ${formation.keyword ? `
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-tags mr-3 text-purple-400"></i>
+                            Technologies & Concepts
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            ${formation.keyword.split(',').map(k => 
+                                `<span class="px-4 py-2 bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-blue-300 rounded-lg text-sm border border-blue-500/30">${k.trim()}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Formateur -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-chalkboard-teacher mr-3 text-green-400"></i>
+                            À propos du formateur
+                        </h3>
+                        <div class="glass rounded-xl p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-tie text-2xl text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold text-xl">${teacher}</p>
+                                    <p class="text-gray-400">${teacherDesc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        ${formation.link && formation.status === 'accessible' ? `
+                        <a href="${formation.link}" target="_blank" class="flex-1 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 text-center">
+                            <i class="fas fa-play-circle mr-2"></i>
+                            Commencer la formation
+                        </a>
+                        ` : `
+                        <button disabled class="flex-1 py-4 bg-gray-600 text-gray-300 font-bold rounded-xl cursor-not-allowed text-center">
+                            <i class="fas fa-lock mr-2"></i>
+                            Formation à venir
+                        </button>
+                        `}
+                        
+                        <a href="https://chat.whatsapp.com/KwB4szJmiyGDKxco4mHFlb" target="_blank" class="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 text-center">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            Rejoindre le groupe
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fermer le modal
+        function closeModal() {
+            const modal = document.getElementById('formation-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer le modal en cliquant en dehors
+        window.onclick = function(event) {
+            const modal = document.getElementById('formation-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Fonction de recherche
+        function searchFormations() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const categorieFilter = document.getElementById('filter-categorie').value;
+            const niveauFilter = document.getElementById('filter-niveau').value;
+            const statutFilter = document.getElementById('filter-statut').value;
+
+            filteredFormations = formationsData.filter(formation => {
+                const matchSearch = !searchTerm || 
+                    formation.Title.toLowerCase().includes(searchTerm) ||
+                    (formation.resume && formation.resume.toLowerCase().includes(searchTerm)) ||
+                    (formation.keyword && formation.keyword.toLowerCase().includes(searchTerm));
+
+                const matchCategorie = categorieFilter === 'tous' || 
+                    (formation.keyword && formation.keyword.toLowerCase().includes(categorieFilter));
+
+                const matchStatut = statutFilter === 'tous' || 
+                    formation.status === statutFilter;
+
+                return matchSearch && matchCategorie && matchStatut;
+            });
+
+            displayFormations();
+        }
+
+        // Event listeners pour les filtres
+        document.getElementById('search-input').addEventListener('input', searchFormations);
+        document.getElementById('filter-categorie').addEventListener('change', searchFormations);
+        document.getElementById('filter-niveau').addEventListener('change', searchFormations);
+        document.getElementById('filter-statut').addEventListener('change', searchFormations);
+
+        // Réinitialiser les filtres
+        document.getElementById('reset-filters').addEventListener('click', () => {
+            document.getElementById('search-input').value = '';
+            document.getElementById('filter-categorie').value = 'tous';
+            document.getElementById('filter-niveau').value = 'tous';
+            document.getElementById('filter-statut').value = 'tous';
+            searchFormations();
+        });
+
+        // Charger les formations au chargement de la page
+        window.addEventListener('DOMContentLoaded', loadFormations);
+    </script>
+
+</body>
+</html>

@@ -74,7 +74,8 @@ const CONFIG = {
     // Format: YYYY-MM-DD HH:MM:SS
     targetDate: "2025-10-04 10:00:00",      // Date/heure d'ouverture de la classe
     endDate: "2025-10-04 12:00:00",         // Date/heure de fermeture de la classe (optionnel)
-    classUrl: "https://meet.jit.si/CasualWarmingsDepictNeither",
+    classUrl: "https://meet.jit.si/Formation_3d_python",
+    // link2:https://meet.jit.si/Formation_3d_python https://meet.jit.si/CasualWarmingsDepictNeither
     // lien: https://meet.jit.si/formationpluspythonvisualisation
     redirectUrl: "index.html"
 };

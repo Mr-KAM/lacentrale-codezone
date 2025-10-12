@@ -128,7 +128,7 @@ function updateCountdown() {
         if (endTarget && now >= endTarget) {
             countdownElement.innerHTML = "La classe est terminée.";
             classLink.href = "#";
-            classLink.innerHTML = "La classe s'est terminée à " + endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
+            classLink.innerHTML = "La classe s'est terminée le "+`${target.toLocaleDateString('fr-FR')}`+" à " + endTarget.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})+" GMT";
             classLink.classList.remove('btn-primary');
             classLink.classList.add('btn-disabled');
         }
